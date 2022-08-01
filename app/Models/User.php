@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Form;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -42,6 +41,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     public function forms(){
-        $this->hasMany(Form::class);
+       return $this->hasMany(Form::class);
     }
 }
