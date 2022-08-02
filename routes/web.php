@@ -22,6 +22,6 @@ Route::get('/dashboard', function () {
     return view('dash.dashboard');
 })->middleware(['auth'])->name('dashboard');
 Route::get('/add-form',AddForm::class)->name('add-form');
-Route::get('/edit-form/{id}',EditForm::class)->name('edit-form');
+Route::get('/edit-form/{form_id}',EditForm::class)->name('edit-form');
 
 require __DIR__.'/auth.php';

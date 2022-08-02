@@ -11,8 +11,9 @@ class AddForm extends Component
         $this->form = new Form;
         $this->form->user_id = Auth::user()->id;
         $this->form->save();
-        error_log("FORM IS".$this->form);
-        return redirect()->route('edit-form', ['id'=>$this->form->id]);
+        error_log($this->form);
+        
+        return redirect()->route('edit-form', ['form_id'=>$this->form->id]);
       
     }
     public function render()
