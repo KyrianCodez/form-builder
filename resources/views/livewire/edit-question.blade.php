@@ -14,30 +14,68 @@
         
         @switch($question->question_types_id)
             @case('1')
-                @livewire('option-container',['i'=>$i], key('item-'.$i.$question->id))
+            @for ($key = 0; $key < $increment; $key++)
+
+            <div class="flex flex-row justify-between pt-12">
+                <input type="radio" disabled  value="form.questions.{{$i}}.options{{$key}}.value" />
+                <x-form-input type="text"  name="form.questions.{{$i}}.options.{{$key}}.value"></x-form-input>
+             
+            </div>
+            @endfor
+            <button type="button" wire:click="add_option">
+                add row
+            </button>   
                 @break
             @case('2')
-                <select>
-                    <option disabled></option>
-                    <input type=text wire:model="form.questions.{{$i}}.options">
-                </select>
+            <ol class=" list-decimal">
+            @for ($key = 0; $key < $increment; $key++)
+            
+                <li >
+                    <input class="list-item" type=text wire:model="form.questions.{{$i}}.options">
+                </li>
+    
+           
+            @endfor
+            </ol>
+            <button type="button" wire:click="add_option">
+                add row
+            </button>   
                 @break
             @case('3')
+            <ul >
+                @for ($key = 0; $key < $increment; $key++)
                 
+                    <li >
+                        <label for="option"><i class="fa-regular fa-square"></i></label>
+                        <input name="option" class="list-item" type=text wire:model="form.questions.{{$i}}.options">
+                    </li>
+        
+               
+                @endfor
+                </ul>
+                <button type="button" wire:click="add_option">
+                    add row
+                </button>   
+           
        
             @break
             @case(4)
-            <x-form-input  type="text" name="form.questions.{{$i}}.options"/> 
+            <x-form-input disabled type="text" name="form.questions.{{$i}}.options"/> 
             @break
             @case(5)
-                <x-form-input  type="textfield"  name="form.questions.{{$i}}.options"/>
+                <textarea disabled wire:model="form.questions.{{$i}}.options"> </textarea>
             @break
         @default
+
 
             
         @endswitch
       
-        
+        <label for="default-toggle" class="inline-flex relative items-center cursor-pointer">
+            <input type="checkbox" wire:model="form.questions.{{$i}}.required" id="default-toggle" class="sr-only peer">
+            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+            <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Required</span>
+          </label>
    
 
 

@@ -5,7 +5,8 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 
 class OptionContainer extends Component
-{   public $increment, $i, $form;
+{   public $increment, $i, $form, $question;
+    
     public function mount(){
         $this->increment = 0;
     }
