@@ -10,9 +10,13 @@ class EditForm extends Component
 {   public $form, $form_name, $form_description;
     protected $rules = [
         'form.name' => 'required|string',
-        'form.description' => 'string',
+        'form.description' => 'string|nullable',
        
     ];
+    protected $listeners = ['loading' => 'updateForm'];
+    public function updateForm(){
+        $this->form = Form::find($this->form->id)->load('questions','user','questionOptions');
+    }
     public function mount($form_id){
         $this->form = Form::find($form_id)->load('questions','user','questionOptions');
     }
@@ -21,18 +25,19 @@ class EditForm extends Component
         
         $this->validateOnly('form.name');
         
-        $this->form->save();
-    
+        $this->save();
     }
     public function updatedFormDescription(){
         $this->validate();
-        $this->form->save();
+        $this->save();
+        
     }
     
  
     public function save(){
         $this->validate();
         $this->form->save();
+        $this->emitSelf('saving');
     }
     public function render()
     {
