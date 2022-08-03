@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('forms', function (Blueprint $table) {
-            $table->string ('name')->change()->default('Untitled Form')->nullable(false);
+        Schema::create('question_options', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->foreignId('question_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->string('value')->default('Option')->nullable(false);
         });
     }
 
@@ -25,8 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('forms', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('question_options');
     }
 };

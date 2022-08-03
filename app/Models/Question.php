@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use PDO;
 
 class Question extends Model
 {
@@ -16,5 +17,8 @@ class Question extends Model
     }
     public function questionType(){
         return $this->hasOne(QuestionType::class);
+    }
+    public function questionOptions(){
+        return $this->hasMany(QuestionOptions::class);
     }
 }
