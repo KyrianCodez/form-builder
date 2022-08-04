@@ -7,7 +7,7 @@ use App\Models\Form;
 use Error;
 
 class EditForm extends Component
-{   public $form, $form_name, $form_description;
+{   public $form, $form_name, $form_description, $url;
     protected $rules = [
         'form.name' => 'required|string',
         'form.description' => 'string|nullable',
@@ -19,8 +19,12 @@ class EditForm extends Component
     }
     public function mount($form_id){
         $this->form = Form::find($form_id)->load('questions','user','questionOptions');
+        $this->url = route('get-form', ['form_id'=> $this->form->id]);
     }
-    
+    public function getUrl(){
+       
+     
+    }
     public function updatedFormName(){
         
         $this->validateOnly('form.name');

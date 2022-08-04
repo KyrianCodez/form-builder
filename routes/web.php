@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 namespace App\Http\Livewire;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +22,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dash.dashboard');
 })->middleware(['auth'])->name('dashboard');
-Route::get('/add-form',AddForm::class)->name('add-form');
-Route::get('/edit-form/{form_id}',EditForm::class)->name('edit-form');
-
+Route::get('/add-form',AddForm::class)->middleware(['auth'])->name('add-form');
+Route::get('/edit-form/{form_id}',EditForm::class)->middleware(['auth'])->name('edit-form');
+Route::get('/get-form/{form_id}',FormResponse::class)->name('get-form');
 require __DIR__.'/auth.php';
