@@ -13,7 +13,7 @@ class EditForm extends Component
         'form.description' => 'string|nullable',
        
     ];
-    protected $listeners = ['loading' => 'updateForm'];
+    protected $listeners = ['updatedFormName'];
     public function updateForm(){
         $this->form = Form::find($this->form->id)->load('questions','user','questionOptions');
     }

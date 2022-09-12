@@ -1,13 +1,24 @@
 <div>
-        <x-form-input type="text"  name="question.title"  />
+    <div class="flex">
+        <div class="flex-1 relative">
+            <input class="effect" type="text"  wire:model="question.title"  />
+            <span class="focus-border"></span>
             @error('question.title') <span class="error">{{ $message }}</span> @enderror
+        </div>
+        <div class="flex-none w-40 "></div>
+        
 
+<select wire:model="question.question_types_id"  class=" rounded-lg">
+  < @foreach ($types as $type )
+  <option value="{{$type->id}}">{{$type->type}}</option>
+@endforeach
+</select>
 
-        <select wire:model="question.question_types_id">
-            @foreach ($types as $type )
-                <option value="{{$type->id}}">{{$type->type}}</option>
-            @endforeach
-        </select>
+            
+    </div>
+        
+
+      
         
         @switch($question->question_types_id)
             @case('1')
@@ -15,7 +26,8 @@
 
             <div class="flex flex-row justify-between pt-12">
                 <label for="option"><i class="fa-regular fa-circle"></i></label>
-                <x-form-input type="text"  name="options.{{$key}}.value"></x-form-input>
+                <input type="text" class="effect" name="options.{{$key}}.value" />
+                <span class="focus-border"></span>
                 <div wire:loading wire:target="options">
                     Updating quantity...
                 </div>
@@ -59,15 +71,14 @@
        
             @break
             @case(4)
-            @foreach($options as $key => $option)
-            <x-form-input disabled type="text" name="options.{{$key}}.value"/> 
-            @endforeach
-       
+           
+            <x-form-input disabled type="text" name="options.value"/> 
+
             @break
             @case(5)
-            @foreach($options as $key => $option)
-            <textarea disabled wire:model="options.{{$key}}.value"> </textarea>
-            @endforeach
+
+            <textarea disabled wire:model="options.value"> </textarea>
+
               
             @break
         @default

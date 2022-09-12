@@ -2,3 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+input[type=text]{
+    @apply border-x-0 border-y-0 border-b border-gray-200 w-full box-border  tracking-[1];
+}
+input[type=text]:focus{
+    @apply outline-0 outline-none ring-0 ring-offset-0 border-gray-200 ;
+}
+.effect~.focus-border{
+   @apply absolute bottom-0 left-1/2 w-0 h-[2px] bg-gray-400 duration-500;
+}
+.effect:focus~.focus-border {
+	@apply w-full duration-500 left-0;
+}
